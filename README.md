@@ -57,6 +57,16 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+```bash
+# to generate migration files run the below command
+$ npm run typeorm migration:generate -- src/database/migrations/notification-settings -d=ormconfig.ts
+
+# To run the generated migrations run the command
+$ npm run typeorm migration:run -- -d=ormconfig.ts
+
+# To revert the generated migrations run the command
+$ npm run typeorm migration:run -- -d=ormconfig.ts
+```
 
 ## Support
 

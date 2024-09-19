@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { DatabaseModule } from './bootstrap/database.module';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { ConfigModule } from '@nestjs/config';
+import { NotificationSettingsModule } from './notification_settings/notification_settings.module';
+import { RedisService } from './redis/redis.service';
 
 @Module({
   imports: [
@@ -15,12 +17,13 @@ import { ConfigModule } from '@nestjs/config';
         config: {
           host: process.env.REDIS_HOST,
           port: Number(process.env.REDIS_PORT),
-          global: true
+          global: true,
         },
       }),
     }),
+    NotificationSettingsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RedisService],
 })
 export class AppModule {}

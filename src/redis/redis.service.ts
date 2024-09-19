@@ -4,7 +4,7 @@ import { Redis } from 'ioredis';
 
 @Injectable()
 export class RedisService {
-  private readonly logger = new Logger(RedisService.name);
+  private readonly _logger = new Logger(RedisService.name);
 
   constructor(
     @InjectRedis()
@@ -17,13 +17,13 @@ export class RedisService {
 
       if (ttl && ttl > 0) {
         await this._redis.set(key, stringValue, 'EX', ttl);
-        this.logger.log(`Set key ${key} with TTL of ${ttl} seconds`);
+        this._logger.log(`Set key ${key} with TTL of ${ttl} seconds`);
       } else {
         await this._redis.set(key, stringValue);
-        this.logger.log(`Set key ${key} without TTL`);
+        this._logger.log(`Set key ${key} without TTL`);
       }
     } catch (error) {
-      this.logger.error(`Failed to set key ${key}: ${error.message}`);
+      this._logger.error(`Failed to set key ${key}: ${error.message}`);
       throw new Error('Redis SET operation failed');
     }
   }
@@ -33,13 +33,24 @@ export class RedisService {
       const value = await this._redis.get(key);
       if (value) {
         const parsedValue = JSON.parse(value) as T;
-        this.logger.log(`Got key ${key}`);
+        this._logger.log(`Got key ${key}`);
         return parsedValue;
       }
       return null;
     } catch (error) {
-      this.logger.error(`Failed to get key ${key}: ${error.message}`);
+      this._logger.error(`Failed to get key ${key}: ${error.message}`);
       throw new Error('Redis GET operation failed');
+    }
+  }
+
+  public async flushDb(allowError = true): Promise<void> {
+    try {
+      await this._redis.flushdb();
+    } catch (error) {
+      this._logger.error(error);
+      if (!allowError) {
+        throw error;
+      }
     }
   }
 }
