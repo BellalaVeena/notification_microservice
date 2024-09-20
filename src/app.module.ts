@@ -6,6 +6,8 @@ import { RedisModule } from '@nestjs-modules/ioredis';
 import { ConfigModule } from '@nestjs/config';
 import { NotificationSettingsModule } from './notification_settings/notification_settings.module';
 import { RedisService } from './redis/redis.service';
+import { EventHandlerModule } from './event_handler/event_handler.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { RedisService } from './redis/redis.service';
       }),
     }),
     NotificationSettingsModule,
+    EventHandlerModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService, RedisService],

@@ -60,7 +60,7 @@ $ npm run test:cov
 ## migration
 ```bash
 # to generate migration files run the below command
-$ npm run typeorm migration:generate -- src/database/migrations/notification-settings -d=ormconfig.ts
+$ npm run typeorm migration:generate -- src/database/migrations/{name} -d=ormconfig.ts
 
 # To run the generated migrations run the command
 $ npm run typeorm migration:run -- -d=ormconfig.ts
