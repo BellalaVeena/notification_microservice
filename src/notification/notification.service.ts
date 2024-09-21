@@ -11,7 +11,12 @@ export class NotificationService {
     private readonly _notificationRepo: Repository<Notification>
   ) {}
 
-  async postNotification(eventTypeId: number, message: string) {
+  async postNotification(
+    eventTypeId: number,
+    message: string
+  ): Promise<{
+    message: string;
+  }> {
     try {
       await this._notificationRepo.save({
         eventTypeId,
@@ -44,7 +49,7 @@ export class NotificationService {
         .limit(notificationFilter.limit);
       return queryBuilder.getRawMany();
     } catch (error) {
-        throw new InternalServerErrorException('Could fetch data!')
+      throw new InternalServerErrorException('Could fetch data!');
     }
   }
 }

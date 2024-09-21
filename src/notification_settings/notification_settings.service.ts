@@ -66,9 +66,7 @@ export class NotificationSettingsService {
         };
       }
     } catch (error) {
-      throw new InternalServerErrorException(
-        `Failed to create notification setting, ${error}`
-      );
+      throw error;
     }
   }
 
@@ -104,7 +102,9 @@ export class NotificationSettingsService {
   async updateNotificationSettings(
     eventType: EventTypeEnum,
     notificationUpdateSettings: NotificationSettingsUpdateDto
-  ) {
+  ): Promise<{
+    message: string;
+  }> {
     try {
       let eventTypeSetting = await this.findOneNotificationSetting(eventType);
       if (!eventTypeSetting) {
@@ -123,9 +123,7 @@ export class NotificationSettingsService {
       });
       return { message: 'Notification settings updated successfully' };
     } catch (error) {
-      throw new InternalServerErrorException(
-        `Failed to update notification settings, ${error}`
-      );
+      throw error;
     }
   }
 }

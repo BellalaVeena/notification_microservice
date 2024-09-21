@@ -25,7 +25,10 @@ export class NotificationSettingsController {
   @Post('/')
   async createNotificationSettings(
     @Body() notificationSetting: NotificationSettingsDto
-  ) {
+  ): Promise<{
+    statusCode: HttpStatus;
+    message: string;
+  }> {
     try {
       const result =
         await this._notificationSettingsService.createNotificationSettings(
@@ -71,7 +74,9 @@ export class NotificationSettingsController {
     @Body() notificationUpdateSettings: NotificationSettingsUpdateDto,
     @Param('eventType', new ParseEnumPipe(EventTypeEnum))
     eventType: EventTypeEnum
-  ) {
+  ): Promise<{
+    message: string;
+  }> {
     const updatedSettings =
       await this._notificationSettingsService.updateNotificationSettings(
         eventType,

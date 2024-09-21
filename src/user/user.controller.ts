@@ -1,10 +1,4 @@
-import {
-  Body,
-  Controller,
-  Param,
-  Patch,
-  Post
-} from '@nestjs/common';
+import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
 import { UserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 import { UserRoleUpdateDto } from './dto/user_role_update.dto';
@@ -29,7 +23,9 @@ export class UserController {
   async updateRole(
     @Param('id') id: number,
     @Body() userRole: UserRoleUpdateDto
-  ) {
-    return this._userService.updateUserRole(id, userRole)
+  ): Promise<{
+    message: string;
+  }> {
+    return this._userService.updateUserRole(id, userRole);
   }
 }
