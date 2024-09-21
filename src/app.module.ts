@@ -8,6 +8,8 @@ import { NotificationSettingsModule } from './notification_settings/notification
 import { RedisService } from './redis/redis.service';
 import { EventHandlerModule } from './event_handler/event_handler.module';
 import { NotificationModule } from './notification/notification.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { NotificationModule } from './notification/notification.module';
     NotificationSettingsModule,
     EventHandlerModule,
     NotificationModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, RedisService],
