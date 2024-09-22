@@ -67,7 +67,35 @@ $ npm run typeorm migration:run -- -d=ormconfig.ts
 
 # To revert the generated migrations run the command
 $ npm run typeorm migration:revert -- -d=ormconfig.ts
+
 ```
+## docker command to run redis
+```
+$ docker run -d --name redis-container -p 6379:6379 redis
+
+or
+# to install redis
+https://redis.io/downloads/
+```
+
+## docker command to run rabbitMQ
+```
+$ docker run -d --name rabbitmq-container -p 5672:5672 -p 15672:15672 rabbitmq:management
+or
+# to install rabbitMQ
+https://www.rabbitmq.com/docs/download
+```
+
+## To format the code
+```
+$ npm run format
+```
+
+## To lint the code
+```
+$ npm run lint
+```
+
 
 ## Support
 
